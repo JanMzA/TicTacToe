@@ -13,7 +13,9 @@ class TicTacToe:
             print(*row)
 
 
-    def set_stone(self,row,col,player_symbol):
+    def set_stone(self,player_symbol):
+        row = int(input("Geben Sie die Reihe ein: "))
+        col = int(input("Geben Sie die Spalte ein: "))
         (self.spielfeld)[row][col] = player_symbol
 
 
@@ -65,19 +67,40 @@ class TicTacToe:
 
 
 
-    def check_win_row(self):
+    def change_player_symbol(self,current_symbol):
+
+        if current_symbol == "X":
+            next_symbol = "O"
+
+        else:
+            next_symbol = "X"
+
+        return next_symbol
+
+    def check_zug_gueltig(self):
         pass
+
+    def check_spielfeld_voll(self):
+        pass
+
 
 
 Spielfeld = TicTacToe()
 
-Spielfeld.set_stone(2,0,"X")
-Spielfeld.set_stone(1,1,"X")
-Spielfeld.set_stone(0,2,"X")
-Spielfeld.print_spielfeld()
 
-Spielfeld.check_win("X")
-print(Spielfeld.win)
+player_symbol = "X"
+while Spielfeld.check_win(player_symbol) == False:
+    Spielfeld.set_stone(player_symbol)
+    Spielfeld.check_win(player_symbol)
+    Spielfeld.print_spielfeld()
+    player_symbol = Spielfeld.change_player_symbol(player_symbol)
+
+
+
+
+
+
+
 
 
 
