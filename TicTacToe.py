@@ -12,6 +12,11 @@ class TicTacToe:
         for row in self.spielfeld:
             print(*row)
 
+    def check_zug_gueltig(self,row,col):
+        if row > 2 or col >2:
+            return False
+        if self.spielfeld[row][col] != "_":
+            return True
 
     def set_stone(self,player_symbol):
         row = int(input("Geben Sie die Reihe ein: "))
@@ -63,6 +68,9 @@ class TicTacToe:
                             break_out_dir = True
                             break
 
+
+
+
         return self.win
 
 
@@ -77,11 +85,13 @@ class TicTacToe:
 
         return next_symbol
 
-    def check_zug_gueltig(self):
-        pass
+
 
     def check_spielfeld_voll(self):
-        pass
+        if "_" not in self.spielfeld[0] and "_" not in self.spielfeld[1] and "_"  not in self.spielfeld[2]:
+            self.win = True
+
+        return self.win
 
 
 
@@ -89,11 +99,13 @@ Spielfeld = TicTacToe()
 
 
 player_symbol = "X"
+Spielfeld.print_spielfeld()
 while Spielfeld.check_win(player_symbol) == False:
     Spielfeld.set_stone(player_symbol)
     Spielfeld.check_win(player_symbol)
     Spielfeld.print_spielfeld()
     player_symbol = Spielfeld.change_player_symbol(player_symbol)
+    Spielfeld.check_spielfeld_voll()
 
 
 
