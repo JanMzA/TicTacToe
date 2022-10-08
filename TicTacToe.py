@@ -72,7 +72,8 @@ class TicTacToe:
                             break_out_dir = True
                             break
 
-
+        if self.win == True:
+            print("Player " + player_symbol + " hat gewonnen")
 
 
         return self.win
@@ -95,7 +96,10 @@ class TicTacToe:
         if "_" not in self.spielfeld[0] and "_" not in self.spielfeld[1] and "_"  not in self.spielfeld[2]:
             self.win = True
 
+        if self.win == True:
+            print("Spiel endet unentschieden")
         return self.win
+
 
 
 
@@ -110,10 +114,14 @@ while Spielfeld.check_win(player_symbol) == False:
         row, col = Spielfeld.eingabe_position()
         eingabegueltig = Spielfeld.check_zug_gueltig(row,col)
     Spielfeld.set_stone(row, col, player_symbol)
-    Spielfeld.check_win(player_symbol)
+    win = Spielfeld.check_win(player_symbol)
+    if win == True:
+        break
     Spielfeld.print_spielfeld()
     player_symbol = Spielfeld.change_player_symbol(player_symbol)
-    Spielfeld.check_spielfeld_voll()
+    full = Spielfeld.check_spielfeld_voll()
+    if full:
+        break
 
 
 
