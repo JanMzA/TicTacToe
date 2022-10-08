@@ -1,4 +1,4 @@
-
+import random as rd
 
 class TicTacToe:
 
@@ -14,14 +14,20 @@ class TicTacToe:
 
     def check_zug_gueltig(self,row,col):
         if row > 2 or col >2 or self.spielfeld[row][col] != "_":
+            print("ungültige Eingabe, Eingabe wiederholen")
             return False
+
         if self.spielfeld[row][col] == "_":
             return True
 
     def eingabe_position(self):
-        row = int(input("Geben Sie die Reihe ein: "))
-        col = int(input("Geben Sie die Spalte ein: "))
-        return row, col
+        try:
+            row = int(input("Geben Sie die Reihe ein: "))
+            col = int(input("Geben Sie die Spalte ein: "))
+            return row, col
+        except:
+            print("Geben Sie Zahlen ein")
+            TicTacToe().eingabe_position()
 
 
     def set_stone(self,row,col,player_symbol):
@@ -104,11 +110,13 @@ class TicTacToe:
 
 
 Spielfeld = TicTacToe()
+symbole =["X","O"]
 
+player_symbol = symbole[rd.randint(0,1)]
 
-player_symbol = "X"
 Spielfeld.print_spielfeld()
 while Spielfeld.check_win(player_symbol) == False:
+    print(player_symbol + " ist an der Reihe")
     eingabegueltig = False
     while eingabegueltig == False:
         row, col = Spielfeld.eingabe_position()
@@ -125,7 +133,7 @@ while Spielfeld.check_win(player_symbol) == False:
 
 
 
-
+### Konsole zum spielen öffnen (pygame)
 
 
 
