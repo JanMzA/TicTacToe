@@ -13,14 +13,18 @@ class TicTacToe:
             print(*row)
 
     def check_zug_gueltig(self,row,col):
-        if row > 2 or col >2:
+        if row > 2 or col >2 or self.spielfeld[row][col] != "_":
             return False
-        if self.spielfeld[row][col] != "_":
+        if self.spielfeld[row][col] == "_":
             return True
 
-    def set_stone(self,player_symbol):
+    def eingabe_position(self):
         row = int(input("Geben Sie die Reihe ein: "))
         col = int(input("Geben Sie die Spalte ein: "))
+        return row, col
+
+
+    def set_stone(self,row,col,player_symbol):
         (self.spielfeld)[row][col] = player_symbol
 
 
@@ -101,7 +105,11 @@ Spielfeld = TicTacToe()
 player_symbol = "X"
 Spielfeld.print_spielfeld()
 while Spielfeld.check_win(player_symbol) == False:
-    Spielfeld.set_stone(player_symbol)
+    eingabegueltig = False
+    while eingabegueltig == False:
+        row, col = Spielfeld.eingabe_position()
+        eingabegueltig = Spielfeld.check_zug_gueltig(row,col)
+    Spielfeld.set_stone(row, col, player_symbol)
     Spielfeld.check_win(player_symbol)
     Spielfeld.print_spielfeld()
     player_symbol = Spielfeld.change_player_symbol(player_symbol)
